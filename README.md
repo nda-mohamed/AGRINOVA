@@ -1,28 +1,28 @@
-# 🌿 Agrinova
+# AGRINOVA
 
 An AI-powered **Smart Agriculture Companion** application built with **Flutter**. Developed as a graduation project, Agrinova integrates **on-device Machine Learning** for plant disease classification, a **voice-activated conversational chatbot** with animated Rive avatars, drone/robot hardware controllers, and a secure **Firebase** cloud backend.
 
 ---
 
-## ✨ Features
+## Features
 
-- **📸 AI Plant Disease Diagnosis**:
+- **AI Plant Disease Diagnosis**:
   - **On-Device Inference (Offline)**: Classify plant diseases instantly using a custom-trained TensorFlow Lite CNN model (`plant_disease_model_cnn.tflite`) via `tflite_flutter`.
   - **API-Based Classifier**: Connects to a remote disease prediction API (`http://127.0.0.1:8000`) for high-precision model execution.
   - **Image Sourcing**: Take photos via the device camera or upload from the gallery using `image_picker`.
-- **🤖 Animated Voice Chatbot Companion**:
+- **Animated Voice Chatbot Companion**:
   - **Smart Chatbot Service**: Conversational interface linked to an AI server (`http://10.0.2.2:8000/ask`) secured with specialized API token headers.
   - **Speech-to-Text (STT) & Text-to-Speech (TTS)**: Fully voice-operated interaction using `speech_to_text` and `flutter_tts`.
   - **Rive Vector Animations**: Rich, fluid interactive companion avatar behaviors powered by the `rive` animation engine.
-- **🛰️ Drone & Hardware Dashboards**: Integrated control hubs (`DroneTap` & `RobotTap`) representing telemetry data and monitoring feeds for automated field robots and agricultural drones.
-- **🔐 Firebase Cloud Architecture**:
+- **Drone & Hardware Dashboards**: Integrated control hubs (`DroneTap` & `RobotTap`) representing telemetry data and monitoring feeds for automated field robots and agricultural drones.
+- **Firebase Cloud Architecture**:
   - Secure authentication (Email/Password registration and **Google Sign-In**) via **Firebase Auth**.
   - User profiles and sensor logs synced to **Cloud Firestore**.
-- **🛹 Agriculture Onboarding**: Engaging tutorial walkthroughs (`onBoardingScreen`) detailing the app's AI utilities.
+- **Agriculture Onboarding**: Engaging tutorial walkthroughs (`onBoardingScreen`) detailing the app's AI utilities.
 
 ---
 
-## 🛠️ Tech Stack & Dependencies
+## Tech Stack & Dependencies
 
 Agrinova leverages several state-of-the-art packages:
 
@@ -44,7 +44,7 @@ Agrinova leverages several state-of-the-art packages:
 
 ---
 
-## 📁 Project Directory Structure
+## Project Directory Structure
 
 ```text
 lib/
@@ -84,7 +84,7 @@ lib/
 
 ---
 
-## 🚀 Getting Started
+##  Getting Started
 
 Follow these instructions to run Agrinova on your environment:
 
