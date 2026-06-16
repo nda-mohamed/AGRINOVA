@@ -93,9 +93,11 @@ class _ChatBotState extends State<ChatBot> {
                 : ListView.builder(
                     controller: _scrollController,
                     padding: const EdgeInsets.all(12),
-                    itemCount: provider.messages.length + (provider.isLoading ? 1 : 0),
+                    itemCount:
+                        provider.messages.length + (provider.isLoading ? 1 : 0),
                     itemBuilder: (context, index) {
-                      if (index == provider.messages.length && provider.isLoading) {
+                      if (index == provider.messages.length &&
+                          provider.isLoading) {
                         return const Padding(
                           padding: EdgeInsets.all(10),
                           child: Align(
@@ -130,7 +132,9 @@ class _ChatBotState extends State<ChatBot> {
                           ),
 
                           decoration: BoxDecoration(
-                            color: msg.isUser ? AppColor.green8 : const Color(0xFF243134),
+                            color: msg.isUser
+                                ? AppColor.green8 // خلفية رسالتك
+                                : Color(0xFF243134), // خلفية رسالة الـ AI
                             borderRadius: BorderRadius.only(
                               topLeft: const Radius.circular(16),
                               topRight: const Radius.circular(16),
@@ -141,8 +145,10 @@ class _ChatBotState extends State<ChatBot> {
 
                           child: Text(
                             msg.text,
-                            style: const TextStyle(
-                              color: Color(0xFF243134),
+                            style: TextStyle(
+                              color: msg.isUser
+                                  ? Color(0xFF243134) // نص رسالتك
+                                  : AppColor.white, // نص رسالة الـ AI
                               fontSize: 15,
                             ),
                           ),
