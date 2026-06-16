@@ -3,7 +3,7 @@ import 'package:http/http.dart' as http;
 import 'dart:convert';
 
 class DiseaseApiService {
-  final String baseUrl = "http://127.0.0.1:8000";
+  final String baseUrl = "";
 
   Future<List> predictDisease(File image) async {
     var request = http.MultipartRequest('POST', Uri.parse(baseUrl));

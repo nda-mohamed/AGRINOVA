@@ -1,13 +1,10 @@
 import 'dart:io';
 import 'package:flutter/material.dart';
 import '../../../../core/ai/plant_disease_model.dart';
-import '../../../../core/api/disease_detection/disease_api_service.dart';
 import '../../../../core/app_theme/AppColors.dart';
-import '../../../../core/repository/disease_repository.dart';
 import 'DetailsScreen.dart';
 
 class CameraScreen extends StatefulWidget {
-
   final File image;
 
   const CameraScreen({super.key, required this.image});
@@ -18,10 +15,9 @@ class CameraScreen extends StatefulWidget {
 
 class _CameraScreenState extends State<CameraScreen>
     with SingleTickerProviderStateMixin {
-
   late AnimationController controller;
 
-  DiseaseRepository repo = DiseaseRepository(DiseaseApiService());
+  PlantDiseaseModel model = PlantDiseaseModel();
 
   @override
   void initState() {
@@ -32,13 +28,19 @@ class _CameraScreenState extends State<CameraScreen>
       duration: const Duration(seconds: 2),
     )..repeat(reverse: true);
 
-    analyze();
+    initAndAnalyze();
   }
 
-  Future analyze() async {
-    await Future.delayed(const Duration(seconds: 2));
+  Future initAndAnalyze() async {
+    await model.loadModel();
 
-    var result = await repo.detectDisease(widget.image);
+    await Future.delayed(const Duration(seconds: 1));
+
+    var result = model.runModel(widget.image);
+
+    print("RESULT: $result");
+
+    if (!mounted) return;
 
     Navigator.pushReplacement(
       context,
@@ -52,35 +54,31 @@ class _CameraScreenState extends State<CameraScreen>
   }
 
   @override
-  Widget build(BuildContext context) {
+  void dispose() {
+    controller.dispose();
+    super.dispose();
+  }
 
+  @override
+  Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: AppColor.background,
       body: Stack(
         children: [
-
-          /// الصورة
           SizedBox(
             width: double.infinity,
             height: double.infinity,
-            child: Image.file(
-              widget.image,
-              fit: BoxFit.cover,
-            ),
+            child: Image.file(widget.image, fit: BoxFit.cover),
           ),
 
-          /// خط الاسكان
           AnimatedBuilder(
             animation: controller,
             builder: (_, __) {
-
               return Positioned(
                 top: controller.value *
                     MediaQuery.of(context).size.height,
-
                 left: 0,
                 right: 0,
-
                 child: Container(
                   height: 3,
                   color: Colors.greenAccent,
@@ -89,7 +87,6 @@ class _CameraScreenState extends State<CameraScreen>
             },
           ),
 
-          /// النص
           const Positioned(
             bottom: 80,
             left: 0,
@@ -105,7 +102,6 @@ class _CameraScreenState extends State<CameraScreen>
               ),
             ),
           ),
-
         ],
       ),
     );

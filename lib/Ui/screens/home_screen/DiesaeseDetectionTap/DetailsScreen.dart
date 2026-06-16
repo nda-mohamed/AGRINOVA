@@ -6,39 +6,36 @@ class DetailsScreen extends StatelessWidget {
   final File image;
   final List result;
 
-  const DetailsScreen({super.key, required this.image, required this.result});
+  const DetailsScreen({
+    super.key,
+    required this.image,
+    required this.result,
+  });
 
   @override
   Widget build(BuildContext context) {
-
-    /// أسماء الأمراض
     List diseases = [
       "Healthy",
       "Powdery Mildew",
       "Leaf Rust"
     ];
 
-    /// تحويل النتيجة إلى double
-    List<double> output = result.map((e) => (e as num).toDouble()).toList();
+    List<double> output =
+    List<double>.from(result.map((e) => (e as num).toDouble()));
 
-    /// أعلى قيمة
     double maxValue = output.reduce((a, b) => a > b ? a : b);
 
-    /// index للمرض
     int index = output.indexOf(maxValue);
 
-    /// اسم المرض
-    String diseaseName = diseases[index];
+    String diseaseName =
+    (index >= 0 && index < diseases.length) ? diseases[index] : "Unknown";
 
-    /// نسبة الثقة
     double confidence = maxValue * 100;
 
     return Scaffold(
       backgroundColor: AppColor.background,
       body: Column(
         children: [
-
-          /// صورة النبات
           SizedBox(
             height: 400,
             width: double.infinity,
@@ -47,10 +44,7 @@ class DetailsScreen extends StatelessWidget {
                 bottomLeft: Radius.circular(25),
                 bottomRight: Radius.circular(25),
               ),
-              child: Image.file(
-                image,
-                fit: BoxFit.cover,
-              ),
+              child: Image.file(image, fit: BoxFit.cover),
             ),
           ),
 
@@ -76,7 +70,6 @@ class DetailsScreen extends StatelessWidget {
             ),
             child: Column(
               children: [
-
                 Text(
                   "Disease: $diseaseName",
                   style: const TextStyle(
@@ -95,11 +88,9 @@ class DetailsScreen extends StatelessWidget {
                     fontWeight: FontWeight.bold,
                   ),
                 ),
-
               ],
             ),
           ),
-
         ],
       ),
     );
